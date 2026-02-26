@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "The Windy Times" } = Astro.props;
+const today = new Date().toLocaleDateString("en-AU", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen">
+    <div class="max-w-6xl mx-auto px-4">
+      <!-- Masthead -->
+      <header class="py-4">
+        <div class="rule-dark"></div>
+        <div class="flex items-center justify-between py-2 text-xs text-[var(--color-text-muted)]">
+          <span>{today}</span>
+          <span>Australian Wind Industry News</span>
+        </div>
+        <div class="rule"></div>
+
+        <div class="py-6 text-center">
+          <a href="/">
+            <!-- Logo placeholder -->
+            <h1 class="masthead-title">The Windy Times</h1>
+          </a>
+        </div>
+
+        <div class="rule-thick"></div>
+
+        <!-- Navigation -->
+        <nav class="flex justify-center gap-8 py-3 text-sm font-sans">
+          <a href="/" class="hover:underline">Home</a>
+          <a href="/archive" class="hover:underline">Archive</a>
+          <a href="/about" class="hover:underline">About</a>
+        </nav>
+
+        <div class="rule"></div>
+      </header>
+
+      <!-- Main content -->
+      <main class="py-6">
+        <slot />
+      </main>
+
+      <!-- Footer -->
+      <footer class="py-8 mt-8">
+        <div class="rule"></div>
+        <div class="py-4 text-center text-xs text-[var(--color-text-muted)]">
+          <p>&copy; {new Date().getFullYear()} The Windy Times. All rights reserved.</p>
+          <p class="mt-1">Curated news about the Australian wind energy industry.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

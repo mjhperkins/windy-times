@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import { fetchArticles, formatDateShort } from "../lib/feed";
+
+const articles = await fetchArticles();
+---
+
+<Base title="Archive - The Windy Times">
+  <h1 class="headline-lg mb-6">Archive</h1>
+  <p class="summary mb-8">All stories from The Windy Times, in chronological order.</p>
+
+  <div class="rule mb-6"></div>
+
+  {articles.length === 0 ? (
+    <p class="text-center py-12 text-[var(--color-text-muted)]">
+      No articles available at this time.
+    </p>
+  ) : (
+    <div class="space-y-6">
+      {articles.map((article, index) => (
+        <article class:list={[
+          "pb-6",
+          index < articles.length - 1 && "border-b border-[var(--color-rule)]"
+        ]}>
+          <a href={article.link} target="_blank" rel="noopener noreferrer">
+            <h2 class="headline-md hover:text-[var(--color-link)]">
+              {article.title}
+            </h2>
+          </a>
+          <p class="summary mt-2 line-clamp-2">{article.summary}</p>
+          <p class="byline mt-2">
+            {article.source} · {formatDateShort(article.pubDate)}
+          </p>
+        </article>
+      ))}
+    </div>
+  )}
+</Base>

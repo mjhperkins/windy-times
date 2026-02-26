@@ -1,0 +1,113 @@
+---
+import Base from "../layouts/Base.astro";
+import { fetchArticlesWithImages, formatDateShort, formatTime } from "../lib/feed";
+
+const articles = await fetchArticlesWithImages(20);
+const featured = articles[0];
+const secondary = articles.slice(1, 4);
+const remaining = articles.slice(4);
+---
+
+<Base>
+  {articles.length === 0 ? (
+    <p class="text-center py-12 text-[var(--color-text-muted)]">
+      No articles available at this time.
+    </p>
+  ) : (
+    <div>
+      <!-- Featured Section -->
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
+        <!-- Featured Article -->
+        <article class="lg:col-span-2">
+          {featured.image && (
+            <a href={featured.link} target="_blank" rel="noopener noreferrer">
+              <img
+                src={featured.image}
+                alt=""
+                class="w-full h-64 md:h-80 object-cover mb-4"
+              />
+            </a>
+          )}
+          <a href={featured.link} target="_blank" rel="noopener noreferrer">
+            <h2 class="headline-xl hover:text-[var(--color-link)]">
+              {featured.title}
+            </h2>
+          </a>
+          <p class="summary mt-3">{featured.summary}</p>
+          <p class="byline mt-3">
+            {featured.source} · {formatDateShort(featured.pubDate)}
+          </p>
+        </article>
+
+        <!-- Secondary Articles -->
+        <aside class="lg:border-l lg:border-[var(--color-rule)] lg:pl-6">
+          {secondary.map((article, index) => (
+            <article class:list={[
+              "pb-4",
+              index < secondary.length - 1 && "mb-4 border-b border-[var(--color-rule)]"
+            ]}>
+              {article.image && (
+                <a href={article.link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={article.image}
+                    alt=""
+                    class="w-full h-32 object-cover mb-3"
+                  />
+                </a>
+              )}
+              <a href={article.link} target="_blank" rel="noopener noreferrer">
+                <h3 class="headline-md hover:text-[var(--color-link)]">
+                  {article.title}
+                </h3>
+              </a>
+              <p class="byline mt-2">
+                {article.source} · {formatDateShort(article.pubDate)}
+              </p>
+            </article>
+          ))}
+        </aside>
+      </section>
+
+      <div class="rule my-6"></div>
+
+      <!-- More Stories -->
+      <section>
+        <h2 class="section-label mb-4">More Stories</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {remaining.map((article) => (
+            <article class="pb-4 border-b border-[var(--color-rule)] md:border-b-0">
+              {article.image && (
+                <a href={article.link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={article.image}
+                    alt=""
+                    class="w-full h-32 object-cover mb-3"
+                  />
+                </a>
+              )}
+              <a href={article.link} target="_blank" rel="noopener noreferrer">
+                <h3 class="headline-sm hover:text-[var(--color-link)]">
+                  {article.title}
+                </h3>
+              </a>
+              <p class="byline mt-2">
+                {article.source}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- View All Link -->
+      <div class="text-center py-8">
+        <a
+          href="/archive"
+          class="inline-block px-6 py-3 border border-[var(--color-rule-dark)] text-sm font-sans hover:bg-[var(--color-text)] hover:text-white transition-colors"
+        >
+          View All Stories →
+        </a>
+      </div>
+    </div>
+  )}
+</Base>
