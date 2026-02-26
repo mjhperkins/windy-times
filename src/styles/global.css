@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Chomsky font - NYT-style blackletter masthead */
+@font-face {
+  font-family: "Chomsky";
+  src: url("/fonts/Chomsky.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* NYT-inspired custom properties */
 @theme inline {
   --font-headline: "Cheltenham", Georgia, "Times New Roman", serif;
@@ -116,10 +125,10 @@ a:hover {
 
 /* Masthead */
 .masthead-title {
-  font-family: "Old English Text MT", "Blackletter", Georgia, serif;
+  font-family: "Chomsky", "Old English Text MT", Georgia, serif;
   font-size: 3.5rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-weight: normal;
+  letter-spacing: 0.01em;
 }
 
 @media (min-width: 768px) {
