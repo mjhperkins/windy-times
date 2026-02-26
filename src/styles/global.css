@@ -35,7 +35,7 @@ body {
 /* Headline styles */
 .headline-xl {
   font-family: var(--font-headline);
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   line-height: 1.1;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -129,11 +129,12 @@ a:hover {
   font-size: 3.5rem;
   font-weight: normal;
   letter-spacing: 0.01em;
+  line-height: 1;
 }
 
 @media (min-width: 768px) {
   .headline-xl {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .masthead-title {
@@ -143,6 +144,6 @@ a:hover {
 
 @media (min-width: 1024px) {
   .headline-xl {
-    font-size: 3.5rem;
+    font-size: 2.25rem;
   }
 }
