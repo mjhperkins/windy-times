@@ -1,6 +1,6 @@
 import Parser from "rss-parser";
 
-const FEED_URL = "https://news.michaelperkinsprojects.com/feed/category-3";
+const FEED_URL = "https://news.michaelperkinsprojects.com/feed/windy-times";
 
 export interface Article {
   title: string;
