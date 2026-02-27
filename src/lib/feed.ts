@@ -11,7 +11,14 @@ export interface Article {
   image?: string;
 }
 
-const parser = new Parser();
+// Configure parser to capture enclosures (images)
+type CustomFeed = { image?: { url?: string } };
+type CustomItem = { enclosure?: { url?: string }; "media:content"?: { $?: { url?: string } } };
+const parser = new Parser<CustomFeed, CustomItem>({
+  customFields: {
+    item: [["enclosure", "enclosure"], ["media:content", "media:content"]],
+  },
+});
 
 export async function fetchArticles(): Promise<Article[]> {
   const feed = await parser.parseURL(FEED_URL);
@@ -22,6 +29,8 @@ export async function fetchArticles(): Promise<Article[]> {
     pubDate: item.pubDate || new Date().toISOString(),
     summary: item.contentSnippet || item.content || "",
     source: (item.categories?.[0] as string) || "Unknown Source",
+    // Get image from enclosure or media:content
+    image: item.enclosure?.url || item["media:content"]?.$?.url,
   }));
 }
 
@@ -59,9 +68,15 @@ export async function fetchArticlesWithImages(
   const articles = await fetchArticles();
   const homepageArticles = articles.slice(0, limit);
 
-  // Fetch images in parallel for homepage articles
+  // Images now come from RSS feed enclosures
+  // Only fetch og:image as fallback for articles without feed images
   const articlesWithImages = await Promise.all(
     homepageArticles.map(async (article) => {
+      if (article.image) {
+        // Already have image from feed
+        return article;
+      }
+      // Fallback: fetch og:image for articles without feed images
       const image = await fetchOgImage(article.link);
       return { ...article, image };
     })
