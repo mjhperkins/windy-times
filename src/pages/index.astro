@@ -3,9 +3,9 @@ import Base from "../layouts/Base.astro";
 import { fetchArticlesWithImages, formatDateShort, formatTime } from "../lib/feed";
 
 const articles = await fetchArticlesWithImages(20);
-const featured = articles[0];
-const secondary = articles.slice(1, 4);
-const remaining = articles.slice(4);
+const featured = articles.slice(0, 2);
+const secondary = articles.slice(2, 6);
+const remaining = articles.slice(6);
 ---
 
 <Base>
@@ -17,29 +17,35 @@ const remaining = articles.slice(4);
     <div>
       <!-- Featured Section -->
       <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
-        <!-- Featured Article -->
-        <article class="lg:col-span-2">
-          {featured.image && (
-            <a href={featured.link} target="_blank" rel="noopener noreferrer">
-              <img
-                src={featured.image}
-                alt=""
-                class="w-full h-64 md:h-80 object-cover mb-4"
-              />
-            </a>
-          )}
-          <a href={featured.link} target="_blank" rel="noopener noreferrer">
-            <h2 class="headline-xl hover:text-[var(--color-link)]">
-              {featured.title}
-            </h2>
-          </a>
-          <p class="summary mt-3">{featured.summary}</p>
-          <p class="byline mt-3">
-            {featured.source} · {formatDateShort(featured.pubDate)}
-          </p>
-        </article>
+        <!-- Featured Articles (2 stacked on left) -->
+        <div class="lg:col-span-2 space-y-6">
+          {featured.map((article, index) => (
+            <article class:list={[
+              index < featured.length - 1 && "pb-6 border-b border-[var(--color-rule)]"
+            ]}>
+              {article.image && (
+                <a href={article.link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={article.image}
+                    alt=""
+                    class="w-full h-48 md:h-64 object-cover mb-4"
+                  />
+                </a>
+              )}
+              <a href={article.link} target="_blank" rel="noopener noreferrer">
+                <h2 class="headline-xl hover:text-[var(--color-link)]">
+                  {article.title}
+                </h2>
+              </a>
+              <p class="summary mt-3 line-clamp-4">{article.summary}</p>
+              <p class="byline mt-3">
+                {article.source} · {formatDateShort(article.pubDate)}
+              </p>
+            </article>
+          ))}
+        </div>
 
-        <!-- Secondary Articles -->
+        <!-- Secondary Articles (4 on right) -->
         <aside class="lg:border-l lg:border-[var(--color-rule)] lg:pl-6">
           {secondary.map((article, index) => (
             <article class:list={[
@@ -51,7 +57,7 @@ const remaining = articles.slice(4);
                   <img
                     src={article.image}
                     alt=""
-                    class="w-full h-32 object-cover mb-3"
+                    class="w-full h-28 object-cover mb-3"
                   />
                 </a>
               )}
@@ -60,7 +66,7 @@ const remaining = articles.slice(4);
                   {article.title}
                 </h3>
               </a>
-              <p class="summary mt-2 line-clamp-2">{article.summary}</p>
+              <p class="summary mt-2 line-clamp-4">{article.summary}</p>
               <p class="byline mt-2">
                 {article.source} · {formatDateShort(article.pubDate)}
               </p>
@@ -92,7 +98,7 @@ const remaining = articles.slice(4);
                   {article.title}
                 </h3>
               </a>
-              <p class="summary mt-2 line-clamp-2">{article.summary}</p>
+              <p class="summary mt-2 line-clamp-4">{article.summary}</p>
               <p class="byline mt-2">
                 {article.source}
               </p>
