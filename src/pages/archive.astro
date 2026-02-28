@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { fetchArticles, formatDateShort } from "../lib/feed";
+import { fetchArticles, formatDateShort, truncateSummaryArchive } from "../lib/feed";
 
 const articles = await fetchArticles();
 ---
@@ -27,7 +27,7 @@ const articles = await fetchArticles();
               {article.title}
             </h2>
           </a>
-          <p class="summary mt-2 line-clamp-4">{article.summary}</p>
+          <p class="summary mt-2">{truncateSummaryArchive(article.summary)}</p>
           <p class="byline mt-2">
             {article.source} · {formatDateShort(article.pubDate)}
           </p>

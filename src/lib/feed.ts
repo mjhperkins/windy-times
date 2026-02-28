@@ -111,3 +111,44 @@ export function formatTime(dateString: string): string {
     hour12: true,
   });
 }
+
+/**
+ * Smart truncate summary at sentence boundary
+ * - Min: 120 chars (adds second sentence if first is too short)
+ * - Max: configurable (default 250, truncates with ellipsis if over)
+ */
+export function truncateSummary(summary: string, maxLength: number = 250): string {
+  const MIN_LENGTH = 120;
+
+  const sentences = summary.split(/(?<=\.)\s+/);
+  const firstSentence = sentences[0] || "";
+
+  let result: string;
+
+  if (firstSentence.length < MIN_LENGTH && sentences.length > 1) {
+    // First sentence too short, add second
+    result = firstSentence + " " + sentences[1];
+  } else {
+    result = firstSentence;
+  }
+
+  // Cap at max length
+  if (result.length > maxLength) {
+    result = result.slice(0, maxLength - 3).trim() + "...";
+  }
+
+  return result;
+}
+
+/**
+ * Truncate summary for archive view (longer, caps at 450)
+ */
+export function truncateSummaryArchive(summary: string): string {
+  const MAX_LENGTH = 450;
+
+  if (summary.length <= MAX_LENGTH) {
+    return summary;
+  }
+
+  return summary.slice(0, MAX_LENGTH - 3).trim() + "...";
+}

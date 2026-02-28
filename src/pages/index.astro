@@ -1,11 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
-import { fetchArticlesWithImages, formatDateShort, formatTime } from "../lib/feed";
+import { fetchArticlesWithImages, formatDateShort, truncateSummary } from "../lib/feed";
 
 const articles = await fetchArticlesWithImages(20);
-const featured = articles.slice(0, 2);
-const secondary = articles.slice(2, 6);
-const remaining = articles.slice(6);
 ---
 
 <Base>
@@ -15,96 +12,33 @@ const remaining = articles.slice(6);
     </p>
   ) : (
     <div>
-      <!-- Featured Section -->
-      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
-        <!-- Featured Articles (2 stacked on left) -->
-        <div class="lg:col-span-2 space-y-6">
-          {featured.map((article, index) => (
-            <article class:list={[
-              index < featured.length - 1 && "pb-6 border-b border-[var(--color-rule)]"
-            ]}>
-              {article.image && (
-                <a href={article.link} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={article.image}
-                    alt=""
-                    class="w-full h-48 md:h-64 object-cover mb-4"
-                  />
-                </a>
-              )}
+      <!-- Articles Grid - Uniform 2-column layout -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {articles.map((article, index) => (
+          <article class:list={[
+            "pb-6",
+            index < articles.length - 1 && "border-b border-[var(--color-rule)] md:border-b-0"
+          ]}>
+            {article.image && (
               <a href={article.link} target="_blank" rel="noopener noreferrer">
-                <h2 class="headline-xl hover:text-[var(--color-link)]">
-                  {article.title}
-                </h2>
+                <img
+                  src={article.image}
+                  alt=""
+                  class="w-full h-48 object-cover mb-4"
+                />
               </a>
-              <p class="summary mt-3 line-clamp-4">{article.summary}</p>
-              <p class="byline mt-3">
-                {article.source} · {formatDateShort(article.pubDate)}
-              </p>
-            </article>
-          ))}
-        </div>
-
-        <!-- Secondary Articles (4 on right) -->
-        <aside class="lg:border-l lg:border-[var(--color-rule)] lg:pl-6">
-          {secondary.map((article, index) => (
-            <article class:list={[
-              "pb-4",
-              index < secondary.length - 1 && "mb-4 border-b border-[var(--color-rule)]"
-            ]}>
-              {article.image && (
-                <a href={article.link} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={article.image}
-                    alt=""
-                    class="w-full h-28 object-cover mb-3"
-                  />
-                </a>
-              )}
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                <h3 class="headline-md hover:text-[var(--color-link)]">
-                  {article.title}
-                </h3>
-              </a>
-              <p class="summary mt-2 line-clamp-4">{article.summary}</p>
-              <p class="byline mt-2">
-                {article.source} · {formatDateShort(article.pubDate)}
-              </p>
-            </article>
-          ))}
-        </aside>
-      </section>
-
-      <div class="rule my-6"></div>
-
-      <!-- More Stories -->
-      <section>
-        <h2 class="section-label mb-4">More Stories</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {remaining.map((article) => (
-            <article class="pb-4 border-b border-[var(--color-rule)] md:border-b-0">
-              {article.image && (
-                <a href={article.link} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={article.image}
-                    alt=""
-                    class="w-full h-32 object-cover mb-3"
-                  />
-                </a>
-              )}
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                <h3 class="headline-sm hover:text-[var(--color-link)]">
-                  {article.title}
-                </h3>
-              </a>
-              <p class="summary mt-2 line-clamp-4">{article.summary}</p>
-              <p class="byline mt-2">
-                {article.source}
-              </p>
-            </article>
-          ))}
-        </div>
+            )}
+            <a href={article.link} target="_blank" rel="noopener noreferrer">
+              <h2 class="headline-md hover:text-[var(--color-link)]">
+                {article.title}
+              </h2>
+            </a>
+            <p class="summary mt-2">{truncateSummary(article.summary)}</p>
+            <p class="byline mt-2">
+              {article.source} · {formatDateShort(article.pubDate)}
+            </p>
+          </article>
+        ))}
       </section>
 
       <!-- View All Link -->
