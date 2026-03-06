@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Page Layout Mockups</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f5f5;
+      color: #121212;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 40px;
+      text-align: center;
+      font-family: Helvetica, sans-serif;
+    }
+    .mockup {
+      background: #fff;
+      padding: 40px;
+      margin-bottom: 60px;
+      border: 1px solid #e2e2e2;
+    }
+    .mockup-label {
+      background: #121212;
+      color: #fff;
+      padding: 8px 16px;
+      font-family: Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      margin: -40px -40px 30px -40px;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .rule {
+      border-top: 1px solid #e2e2e2;
+      margin-bottom: 24px;
+    }
+    .summary {
+      font-size: 15px;
+      color: #363636;
+      line-height: 1.5;
+    }
+    .link-blue {
+      color: #326891;
+      text-decoration: none;
+    }
+    .link-blue:hover {
+      text-decoration: underline;
+    }
+    img {
+      display: block;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .section {
+      margin-bottom: 32px;
+    }
+
+    /* Option A - Centered image above */
+    .option-a img {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 20px;
+    }
+    .option-a .bio {
+      text-align: center;
+    }
+
+    /* Option B - Hero style */
+    .option-b .hero {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    .option-b img {
+      width: 250px;
+      height: 250px;
+      flex-shrink: 0;
+    }
+    .option-b .bio {
+      padding-top: 10px;
+    }
+
+    /* Option C - Float right */
+    .option-c .bio-section {
+      overflow: hidden;
+    }
+    .option-c img {
+      width: 180px;
+      height: 180px;
+      float: right;
+      margin: 0 0 20px 24px;
+    }
+
+    /* Option D - Side by side larger */
+    .option-d .editor-section {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .option-d img {
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>About Page Layout Options</h1>
+
+    <!-- Option A -->
+    <div class="mockup option-a">
+      <div class="mockup-label">Option A: Centered Image Above</div>
+
+      <div class="section">
+        <h2>About the Editor</h2>
+        <div class="rule"></div>
+        <img src="/michael-perkins.jpg" alt="Michael Perkins">
+        <div class="bio">
+          <p class="summary">
+            I'm a Melbourne-based Wind Energy professional working at Vestas. After 15 years in the Australian renewable energy industry, I created The Windy Times to help others stay informed about the sector's rapid evolution.
+          </p>
+          <p class="summary" style="margin-top: 16px;">
+            You can find me on <a href="#" class="link-blue">LinkedIn</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>My Sources</h2>
+        <div class="rule"></div>
+        <p class="summary">I aggregate news from energy publications such as RenewEconomy, WattClarity, the AFR and PV Magazine Australia...</p>
+      </div>
+    </div>
+
+    <!-- Option B -->
+    <div class="mockup option-b">
+      <div class="mockup-label">Option B: Hero Style (Large Side Image)</div>
+
+      <div class="section">
+        <h2>About the Editor</h2>
+        <div class="rule"></div>
+        <div class="hero">
+          <img src="/michael-perkins.jpg" alt="Michael Perkins">
+          <div class="bio">
+            <p class="summary">
+              I'm a Melbourne-based Wind Energy professional working at Vestas. After 15 years in the Australian renewable energy industry, I created The Windy Times to help others stay informed about the sector's rapid evolution.
+            </p>
+            <p class="summary" style="margin-top: 16px;">
+              You can find me on <a href="#" class="link-blue">LinkedIn</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>My Sources</h2>
+        <div class="rule"></div>
+        <p class="summary">I aggregate news from energy publications such as RenewEconomy, WattClarity, the AFR and PV Magazine Australia...</p>
+      </div>
+    </div>
+
+    <!-- Option C -->
+    <div class="mockup option-c">
+      <div class="mockup-label">Option C: Image Floated Right</div>
+
+      <div class="section">
+        <h2>About the Editor</h2>
+        <div class="rule"></div>
+        <div class="bio-section">
+          <img src="/michael-perkins.jpg" alt="Michael Perkins">
+          <p class="summary">
+            I'm a Melbourne-based Wind Energy professional working at Vestas. After 15 years in the Australian renewable energy industry, I created The Windy Times to help others stay informed about the sector's rapid evolution.
+          </p>
+          <p class="summary" style="margin-top: 16px;">
+            You can find me on <a href="#" class="link-blue">LinkedIn</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>My Sources</h2>
+        <div class="rule"></div>
+        <p class="summary">I aggregate news from energy publications such as RenewEconomy, WattClarity, the AFR and PV Magazine Australia...</p>
+      </div>
+    </div>
+
+    <!-- Option D -->
+    <div class="mockup option-d">
+      <div class="mockup-label">Option D: Side by Side (Larger Image + Heading)</div>
+
+      <div class="section">
+        <h2>About the Editor</h2>
+        <div class="rule"></div>
+        <div class="editor-section">
+          <img src="/michael-perkins.jpg" alt="Michael Perkins">
+          <div class="bio">
+            <p class="summary">
+              I'm a Melbourne-based Wind Energy professional working at Vestas. After 15 years in the Australian renewable energy industry, I created The Windy Times to help others stay informed about the sector's rapid evolution.
+            </p>
+            <p class="summary" style="margin-top: 16px;">
+              You can find me on <a href="#" class="link-blue">LinkedIn</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>My Sources</h2>
+        <div class="rule"></div>
+        <p class="summary">I aggregate news from energy publications such as RenewEconomy, WattClarity, the AFR and PV Magazine Australia...</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
