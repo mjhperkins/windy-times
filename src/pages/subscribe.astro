@@ -1,0 +1,211 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Subscribe - The Windy Times">
+  <article class="max-w-xl">
+    <h1 class="headline-lg mb-6">Subscribe to The Windy Times</h1>
+
+    <div class="rule mb-6"></div>
+
+    <p class="summary mb-8">
+      Get curated Australian wind energy news delivered to your inbox.
+      Choose how often you'd like to receive updates.
+    </p>
+
+    <!-- Frequency Tabs -->
+    <div class="flex border-b border-[var(--color-rule)] mb-6">
+      <button
+        type="button"
+        id="tab-daily"
+        class="tab-btn px-6 py-3 font-bold border-b-2 border-[var(--color-text)] text-[var(--color-text)]"
+        data-frequency="daily"
+      >
+        Daily Digest
+      </button>
+      <button
+        type="button"
+        id="tab-weekly"
+        class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+        data-frequency="weekly"
+      >
+        Weekly Roundup
+      </button>
+    </div>
+
+    <!-- Daily Form -->
+    <div id="form-daily" class="form-panel">
+      <p class="byline mb-4">Receive the latest wind energy news every morning</p>
+
+      <form
+        id="sib-form-daily"
+        method="POST"
+        action="https://a4d60815.sibforms.com/serve/MUIFAKWQeNHM-ovONQqNylXrE5p_Q78nsMRRgjZLh1CKrGYqOyDcKq-3Ll__j5Ul6kq7CV70uSKtIh3PIGctdndBLRfgEm_FWbb39HvBKRHTjUyFTzHjTkVLDXN2RvMLmC8w2d318g_B4YQbvEYzlF0zTEf-ntIG0ezgFUzmckMnIZrGLNqrQSRVCiKzlyZsvGF-WQPYATqJUSAEFQ=="
+        data-type="subscription"
+        class="space-y-4"
+      >
+        <div>
+          <label for="EMAIL-daily" class="block headline-sm mb-2">Email Address</label>
+          <input
+            type="email"
+            id="EMAIL-daily"
+            name="EMAIL"
+            required
+            placeholder="you@example.com"
+            autocomplete="off"
+            class="w-full px-4 py-3 border border-[var(--color-rule)] focus:outline-none focus:border-[var(--color-text)] text-base font-[var(--font-body)]"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-[var(--color-text)] text-white py-3 px-6 font-bold hover:bg-[var(--color-text-secondary)] transition-colors flex items-center justify-center gap-2"
+        >
+          <span>Subscribe to Daily</span>
+          <svg class="loading-icon hidden w-5 h-5 animate-spin" viewBox="0 0 512 512" fill="currentColor">
+            <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+          </svg>
+        </button>
+
+        <!-- Honeypot & locale -->
+        <input type="text" name="email_address_check" value="" class="hidden">
+        <input type="hidden" name="locale" value="en">
+      </form>
+
+      <div id="message-daily" class="mt-4 p-4 hidden"></div>
+    </div>
+
+    <!-- Weekly Form -->
+    <div id="form-weekly" class="form-panel hidden">
+      <p class="byline mb-4">A summary of the week's top stories, sent every Monday</p>
+
+      <form
+        id="sib-form-weekly"
+        method="POST"
+        action="https://a4d60815.sibforms.com/serve/MUIFAMCuEQIMwrxuQwsf2y6AyQOAs6OTRk4FClVOYCirjmMiyeAzgKAKH4dBDSlSUFXOoifJNgsmA4KjXORFOz8zmkA8HuwtR4JZUmShT0pDLn8dra7uy4Q50VvFZLTPiWn6hKUHhRiAlLDvzbzUy9w9nin8AR4D0n6HlpHXO-TK0OK-xhIzy6p3qMrmezcQaGkKrdjFxYiRuKTCoA=="
+        data-type="subscription"
+        class="space-y-4"
+      >
+        <div>
+          <label for="EMAIL-weekly" class="block headline-sm mb-2">Email Address</label>
+          <input
+            type="email"
+            id="EMAIL-weekly"
+            name="EMAIL"
+            required
+            placeholder="you@example.com"
+            autocomplete="off"
+            class="w-full px-4 py-3 border border-[var(--color-rule)] focus:outline-none focus:border-[var(--color-text)] text-base font-[var(--font-body)]"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-[var(--color-text)] text-white py-3 px-6 font-bold hover:bg-[var(--color-text-secondary)] transition-colors flex items-center justify-center gap-2"
+        >
+          <span>Subscribe to Weekly</span>
+          <svg class="loading-icon hidden w-5 h-5 animate-spin" viewBox="0 0 512 512" fill="currentColor">
+            <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+          </svg>
+        </button>
+
+        <!-- Honeypot & locale -->
+        <input type="text" name="email_address_check" value="" class="hidden">
+        <input type="hidden" name="locale" value="en">
+      </form>
+
+      <div id="message-weekly" class="mt-4 p-4 hidden"></div>
+    </div>
+
+    <div class="rule my-8"></div>
+
+    <section>
+      <h2 class="headline-md mb-4">Prefer RSS?</h2>
+      <p class="summary">
+        Subscribe via RSS feed:
+        <a href="/rss.xml" class="link-blue">
+          windytimes.michaelperkinsprojects.com/rss.xml
+        </a>
+      </p>
+    </section>
+  </article>
+
+  <!-- Brevo form scripts -->
+  <script is:inline>
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+    window.LOCALE = 'en';
+    window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+    window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
+    window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+    window.translation = {
+      common: {
+        selectedList: '{quantity} list selected',
+        selectedLists: '{quantity} lists selected',
+        selectedOption: '{quantity} selected',
+        selectedOptions: '{quantity} selected',
+      }
+    };
+    var AUTOHIDE = Boolean(0);
+  </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.form-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const frequency = tab.dataset.frequency;
+
+        // Update tab styles
+        tabs.forEach(t => {
+          t.classList.remove('border-[var(--color-text)]', 'text-[var(--color-text)]');
+          t.classList.add('border-transparent', 'text-[var(--color-text-muted)]');
+        });
+        tab.classList.remove('border-transparent', 'text-[var(--color-text-muted)]');
+        tab.classList.add('border-[var(--color-text)]', 'text-[var(--color-text)]');
+
+        // Show/hide forms
+        panels.forEach(p => p.classList.add('hidden'));
+        document.getElementById(`form-${frequency}`)?.classList.remove('hidden');
+      });
+    });
+
+    // Form submission handling
+    document.querySelectorAll('form[data-type="subscription"]').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        const button = form.querySelector('button[type="submit"]');
+        const icon = button?.querySelector('.loading-icon');
+        const span = button?.querySelector('span');
+
+        if (icon && span) {
+          icon.classList.remove('hidden');
+          span.textContent = 'Subscribing...';
+        }
+      });
+    });
+
+    // Handle Brevo response messages
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.id === 'error-message' || mutation.target.id === 'success-message') {
+          const isVisible = !mutation.target.classList.contains('sib-hide');
+          if (isVisible) {
+            const formId = document.querySelector('.form-panel:not(.hidden)')?.id;
+            const messageDiv = document.getElementById(`message-${formId?.replace('form-', '')}`);
+
+            if (messageDiv) {
+              const isError = mutation.target.id === 'error-message';
+              messageDiv.textContent = isError
+                ? 'Your subscription could not be saved. Please try again.'
+                : 'Thanks for subscribing! Check your inbox.';
+              messageDiv.className = `mt-4 p-4 text-center font-bold ${isError ? 'bg-red-50 text-red-800' : 'bg-green-50 text-green-800'}`;
+              messageDiv.classList.remove('hidden');
+            }
+          }
+        }
+      });
+    });
+  </script>
+</Base>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>The Windy Times</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    /* Progressive enhancement - these help but aren't required */
+    @media screen and (max-width: 600px) {
+      .container { width: 100% !important; }
+      .story-image { width: 100% !important; height: auto !important; }
+      .story-content { padding: 16px 0 !important; }
+      .masthead-title { font-size: 36px !important; }
+      .headline { font-size: 18px !important; }
+      .featured-headline { font-size: 22px !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Georgia, 'Times New Roman', serif; color: #121212; line-height: 1.6;">
+
+  <!-- Wrapper -->
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5;">
+    <tr>
+      <td align="center" style="padding: 20px 10px;">
+
+        <!-- Container -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="container" style="background-color: #ffffff; max-width: 600px;">
+
+          <!-- Header / Masthead -->
+          <tr>
+            <td style="padding: 30px 30px 20px 30px; text-align: center; border-bottom: 3px double #121212;">
+              <!-- Date -->
+              <p style="margin: 0 0 12px 0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #666666;">
+                {{ feed.PUBDATE | date("D MMM YYYY") }}
+              </p>
+              <!-- Masthead Image -->
+              <a href="https://windytimes.michaelperkinsprojects.com/" style="text-decoration: none;">
+                <img src="https://windytimes.michaelperkinsprojects.com/email/masthead.png" alt="The Windy Times" width="400" style="width: 100%; max-width: 400px; height: auto; display: inline-block; border: 0;">
+              </a>
+              <!-- Tagline -->
+              <p style="margin: 12px 0 0 0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-style: italic; color: #666666;">
+                Australian Wind Industry News
+              </p>
+            </td>
+          </tr>
+
+          <!-- Intro text -->
+          <tr>
+            <td style="padding: 24px 30px 20px 30px;">
+              <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 15px; line-height: 1.6; color: #363636;">
+                Your curated digest of the latest news from Australia's wind energy sector.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Stories Loop -->
+          {% for item in items %}
+          {% if loop.first %}
+          <!-- Featured Story (first item) -->
+          <tr>
+            <td style="padding: 0 30px 24px 30px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="border-top: 1px solid #e2e2e2; padding-top: 20px;">
+                    <!-- Section label -->
+                    <p style="margin: 0 0 8px 0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #666666;">
+                      Top Story
+                    </p>
+                    <!-- Featured image -->
+                    {% if item.IMAGE %}
+                    <a href="{{ item.URL }}" style="text-decoration: none;">
+                      <img src="{{ item.IMAGE }}" alt="" width="540" class="story-image" style="width: 100%; max-width: 540px; height: auto; display: block; margin-bottom: 16px; border: 0;">
+                    </a>
+                    {% endif %}
+                    <!-- Headline -->
+                    <a href="{{ item.URL }}" style="text-decoration: none; color: #121212;">
+                      <h2 class="featured-headline" style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em;">
+                        {{ item.TITLE }}
+                      </h2>
+                    </a>
+                    <!-- Summary -->
+                    <p style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 15px; line-height: 1.5; color: #363636;">
+                      {{ item.DESCRIPTION | safe }}
+                    </p>
+                    <!-- Source & date -->
+                    <p style="margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #666666;">
+                      {{ item.SOURCE }} · {{ item.PUBDATE | date("D MMM") }}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% else %}
+          <!-- Regular Story -->
+          <tr>
+            <td style="padding: 0 30px 20px 30px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="border-top: 1px solid #e2e2e2; padding-top: 16px;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        {% if item.IMAGE %}
+                        <!-- Thumbnail -->
+                        <td width="120" valign="top" style="padding-right: 16px;">
+                          <a href="{{ item.URL }}" style="text-decoration: none;">
+                            <img src="{{ item.IMAGE }}" alt="" width="120" height="80" class="story-image" style="width: 120px; height: 80px; object-fit: cover; display: block; border: 0;">
+                          </a>
+                        </td>
+                        {% endif %}
+                        <!-- Content -->
+                        <td valign="top" class="story-content">
+                          <!-- Headline -->
+                          <a href="{{ item.URL }}" style="text-decoration: none; color: #121212;">
+                            <h3 class="headline" style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.25; font-weight: 700;">
+                              {{ item.TITLE }}
+                            </h3>
+                          </a>
+                          <!-- Summary -->
+                          <p style="margin: 0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.5; color: #363636;">
+                            {{ item.DESCRIPTION | safe }}
+                          </p>
+                          <!-- Source & date -->
+                          <p style="margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; color: #666666;">
+                            {{ item.SOURCE }} · {{ item.PUBDATE | date("D MMM") }}
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 30px 30px 30px; border-top: 3px double #121212; text-align: center;">
+              <p style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; font-style: italic; color: #666666;">
+                Curated news about the Australian wind energy industry
+              </p>
+              <p style="margin: 0 0 16px 0;">
+                <a href="https://windytimes.michaelperkinsprojects.com/" style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #326891; text-decoration: none;">
+                  Visit The Windy Times
+                </a>
+              </p>
+              <p style="margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; color: #999999;">
+                <a href="{{ unsubscribe }}" style="color: #999999; text-decoration: underline;">Unsubscribe</a>
+                &nbsp;·&nbsp;
+                <a href="{{ mirror }}" style="color: #999999; text-decoration: underline;">View in browser</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Container -->
+
+      </td>
+    </tr>
+  </table>
+  <!-- End Wrapper -->
+
+</body>
+</html>
